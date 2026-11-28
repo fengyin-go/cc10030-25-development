@@ -71,6 +71,25 @@ npm run dev
 | 调度指令 | `dispatch_note` | 指令单 | 接收船舶、指令内容、发出时间 |
 | 费率核算 | `tariff` | 费率单 | 服务项目、计费单位、标准费率 |
 
+## 复检办理
+
+船舶检验与船舶保养共用一条“复检办理”链路，页面入口在 `船舶检验` 和 `船舶保养`
+工作台顶部的复检办理清单（`frontend/src/components/RecheckPanel.vue`）。
+
+- `GET /api/recheck?days=7`：筛选未来 7 日内到期的复检项目，按复检期限升序排序；
+  `first` 是首条，`first_cooling` 是首条冷却复检，`moved_out` 是已移出窗口的项目，
+  `accepted` 是已受理、仍可查原检验与原周期的安排。
+- `POST /api/recheck/arrange`：发出安排请求并返回回执。同一检验按唯一键去重，
+  并发或重复提交只保留一条办理，不会新增冷却复检；超出窗口的未受理项转为
+  `等待周期更正`。
+- `POST /api/recheck/{id}/accept`：受理安排，生成受理编号，并从原冷却检验提取证据。
+- `POST /api/recheck/maintenance/{id}/cycle`：更正保养周期/补报下次保养日期，
+  关联复检重新定位到窗口内外。
+- `GET /api/recheck/maintenance/{id}`：从原保养工单恢复复检办理号、原检验和原周期。
+- 保养工单的 `核验保养` 动作必须关联已受理的复检办理；三种状态分别是
+  `已发出安排请求`（只发了请求，不能核验）、`已受理`（凭受理编号取证据核验）、
+  `等待周期更正`（超出新期限，未受理项不能沿旧清单继续核验）。
+
 ## 约定
 
 - 全部模块共享`frontend/src/views/WorkbenchView.vue|tsx`和一套资源路由。

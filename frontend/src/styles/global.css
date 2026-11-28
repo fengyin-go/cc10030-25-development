@@ -70,3 +70,34 @@ body { margin: 0; background: #f6f8fb; color: #1f2937; }
 .analysis-chart { display: flex; align-items: flex-end; gap: 8px; height: 160px; padding: 12px 0; }
 .analysis-bar { flex: 1; border-radius: 4px 4px 0 0; background: var(--brand); min-width: 24px; position: relative; transition: height 0.4s; }
 .analysis-bar span { position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%); font-size: 10px; color: var(--muted); white-space: nowrap; }
+
+/* 复检办理清单 */
+.recheck-panel { margin: 12px 0 18px; background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+.recheck-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.recheck-head h3 { margin: 0 0 4px; font-size: 15px; }
+.recheck-desc { color: var(--muted); font-size: 12px; margin: 0; max-width: 720px; }
+.recheck-actions { display: flex; align-items: flex-end; gap: 8px; }
+.recheck-days span { display: block; font-size: 12px; color: var(--muted); }
+.recheck-days input { width: 72px; padding: 6px; border: 1px solid var(--border); border-radius: 6px; }
+.recheck-window { font-size: 12px; color: var(--muted); margin: 10px 0; }
+.recheck-table .rank-badge { display: inline-block; min-width: 20px; text-align: center; border-radius: 10px; background: #e2e8f0; font-size: 12px; padding: 1px 6px; }
+.recheck-table .first-tag { margin-left: 6px; color: #b45309; font-size: 11px; }
+.recheck-table .cooling-tag { margin-left: 6px; background: #e0f2fe; color: #0369a1; border-radius: 8px; padding: 1px 6px; font-size: 11px; }
+.recheck-table .remaining { display: block; color: var(--muted); font-size: 11px; }
+.recheck-table .status-chip { display: inline-block; border-radius: 8px; padding: 1px 8px; font-size: 12px; }
+.recheck-table .status-hint { display: block; color: var(--muted); font-size: 11px; margin-top: 2px; }
+.recheck-row.tone-accepted .status-chip { background: #dcfce7; color: #166534; }
+.recheck-row.tone-pending .status-chip { background: #dbeafe; color: #1d4ed8; }
+.recheck-row.tone-waiting .status-chip { background: #fef3c7; color: #92400e; }
+.recheck-row.tone-idle .status-chip { background: #f1f5f9; color: #475569; }
+.recheck-row.is-first { background: #f8fbff; }
+.recheck-outside, .recheck-accepted, .recheck-receipt, .recheck-maintenance-tools, .recheck-evidence, .recheck-recovered { margin-top: 12px; border-top: 1px dashed var(--border); padding-top: 10px; }
+.recheck-outside h4, .recheck-accepted h4, .recheck-receipt h4, .recheck-maintenance-tools h4 { margin: 0 0 6px; font-size: 13px; }
+.recheck-outside ul, .recheck-accepted ul { margin: 0; padding-left: 18px; font-size: 12px; color: #475569; }
+.recheck-receipt dl, .recheck-recovered dl, .recheck-evidence dl { display: grid; grid-template-columns: 130px 1fr; gap: 4px 10px; font-size: 12px; margin: 0; }
+.recheck-receipt dt, .recheck-recovered dt, .recheck-evidence dt { color: var(--muted); }
+.recheck-receipt dd, .recheck-recovered dd, .recheck-evidence dd { margin: 0; }
+.recheck-feedback { font-size: 13px; margin: 10px 0 0; }
+.recheck-form { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end; margin-top: 8px; }
+.recheck-form label span { display: block; font-size: 12px; color: var(--muted); }
+.recheck-form input { padding: 6px 10px; border: 1px solid var(--border); border-radius: 6px; font-size: 13px; }

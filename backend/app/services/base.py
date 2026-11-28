@@ -59,6 +59,16 @@ class BaseModuleService:
         rows.append(entry)
         return entry, []
 
+    def handle_action(
+        self,
+        entry_id: int,
+        action: str,
+        payload: Any | None = None,
+    ) -> dict[str, Any]:
+        """动作入口：默认转交 run_action，需要回执/附加数据的模块可覆盖。"""
+        entry, message = self.run_action(entry_id, action)
+        return {"ok": entry is not None, "message": message, "entry": entry}
+
     def run_action(self, entry_id: int, action: str) -> tuple[dict[str, Any] | None, str]:
         entry = store.find(self.MODULE, entry_id)
         if entry is None:

@@ -94,5 +94,15 @@ def create_entry(module: str, payload: EntryPayload) -> ActionResult:
 @router.post("/{module}/{entry_id}/actions", response_model=ActionResult)
 def run_action(module: str, entry_id: int, payload: ActionPayload) -> ActionResult:
     service = require_service(module)
-    entry, message = service.run_action(entry_id, payload.action.strip())
-    return ActionResult(ok=entry is not None, message=message, entry=entry)
+    result = service.handle_action(entry_id, payload.action.strip(), payload)
+    return ActionResult(
+        ok=bool(result.get("ok")),
+        message=str(result.get("message", "")),
+        entry=result.get("entry"),
+        receipt=result.get("receipt"),
+        handling=result.get("handling"),
+        status=result.get("status"),
+        duplicate=bool(result.get("duplicate", False)),
+        data=result if result.get("evidence") is not None else None,
+        evidence=result.get("evidence"),
+    )

@@ -22,6 +22,12 @@
       </article>
     </div>
 
+    <RecheckPanel
+      v-if="meta.key === 'inspection' || meta.key === 'maintenance'"
+      :module-key="meta.key"
+      @changed="reload"
+    />
+
     <p class="status-legend">
       <span v-for="item in statusSummary" :key="item.status" class="legend-item">
         {{ item.status }}：{{ item.count }}
@@ -104,6 +110,7 @@ import {
   runAction as applyAction,
 } from '@/api/backend-service'
 import type { EntryRow } from '@/data/types'
+import RecheckPanel from '@/components/RecheckPanel.vue'
 
 const props = defineProps<{ moduleKey: string }>()
 const meta = moduleMeta(props.moduleKey)
